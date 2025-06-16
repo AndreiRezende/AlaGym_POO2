@@ -1,5 +1,6 @@
 package com.br.ala_gym_poo2.model;
 
+import com.br.ala_gym_poo2.model.enums.Role;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class Usuario {
     //Atributos Gerais
     @Column(nullable=false)
     private String nome;
-    @Column(nullable=false)
+    @Column(nullable=false, unique = true)
     private String email;
     @Column(nullable=false)
     private String senha;
@@ -23,20 +24,21 @@ public class Usuario {
     @Column(nullable=false)
     private String endereco;
     @Column(nullable=false)
-    private String permissao;
+    @Enumerated(EnumType.STRING)
+    private Role permissao;
     @Column(nullable = false)
     private int idade;
     @Column(nullable=false)
     private char sexo;
     //Atributos Instrutor
-    @Column(nullable=true)
+    @Column
     private int cref;
     //Atributos Aluno
-    @Column(nullable=true)
+    @Column
     private float peso;
-    @Column(nullable=true)
+    @Column
     private float altura;
-    @Column(nullable=true)
+    @Column
     private boolean statusPagamento;
 
     public boolean isStatusPagamento() {
@@ -119,11 +121,11 @@ public class Usuario {
         this.endereco = endereco;
     }
 
-    public String getPermissao() {
+    public Role getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(String permissao) {
+    public void setPermissao(Role permissao) {
         this.permissao = permissao;
     }
 
@@ -142,4 +144,5 @@ public class Usuario {
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
+
 }
