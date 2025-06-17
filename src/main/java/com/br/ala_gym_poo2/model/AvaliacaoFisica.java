@@ -2,6 +2,7 @@ package com.br.ala_gym_poo2.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,8 @@ public class AvaliacaoFisica {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column
-    private Date dataAvaliacao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dataAvaliacao;
     @Column
     private int percentualGordura;
     @Column
