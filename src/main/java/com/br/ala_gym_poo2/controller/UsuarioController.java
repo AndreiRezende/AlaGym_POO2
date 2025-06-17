@@ -84,6 +84,14 @@ public class UsuarioController {
         return this.usuarioRepository.save(usuario);
     }
 
+    @PutMapping("/treino/{id}")
+    public Usuario updateTreinoUsuario(@PathVariable Long id, @RequestBody UsuarioTreinoDTO dto){
+        Usuario usuario = this.usuarioRepository.findById(id).get();
+        usuario.setIdsTreino(dto.idsTreino());
+
+        return this.usuarioRepository.save(usuario);
+    }
+
     @PostMapping("/login")
     public String loginUsuario(@RequestBody LoginUsuarioDTO dto){
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
