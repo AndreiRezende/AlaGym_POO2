@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/treino")
-
 public class TreinoController {
     private final TreinoRepository treinoRepository;
     private final ExerciciosRepository exerciciosRepository;
@@ -43,6 +42,11 @@ public class TreinoController {
         return dtos;
     }
 
+    @GetMapping("/{id}")
+    public Treino getTreinoById(@PathVariable Long id) {
+        return this.treinoRepository.findById(id).orElse(null);
+    }
+
     @PostMapping
     public TreinoDTOOut createTreino(@RequestBody TreinoDTO dto) {
         List<Exercicio> exercicios = new ArrayList<>();
@@ -54,7 +58,7 @@ public class TreinoController {
         });
 
         Treino treino = new Treino();
-        treino.setDescription(dto.descricao());
+        treino.setDescricao(dto.descricao());
 
         treinoRepository.save(treino);
         TreinoExercicio treinoExercicio = new TreinoExercicio();
@@ -79,10 +83,17 @@ public class TreinoController {
             exercicios.add(exercicio);
         });
         treinoExercicio.setExercicioId(dto.idExercicios());
-        treino.setDescription(dto.descricao());
+        treino.setDescricao(dto.descricao());
         treinoRepository.save(treino);
         treinoExercicioRepository.save(treinoExercicio);
 
         return new TreinoDTOOut(treino, exercicios);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTreino(@PathVariable Long id){
+        this.treinoRepository.deleteById(id);
+        Long idTreinoExercicio = this.treinoExercicioRepository.findByTreinoId(id).getId();
+        this.treinoExercicioRepository.deleteById(idTreinoExercicio);
     }
 }
