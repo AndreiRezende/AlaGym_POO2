@@ -57,6 +57,7 @@ public class UsuarioController {
         usuario.setPeso(dto.peso());
         usuario.setAltura(dto.altura());
         usuario.setStatusPagamento(dto.statusPagamento());
+        usuario.setIdsTreino(dto.idsTreino());
         return this.usuarioRepository.save(usuario);
     }
 
