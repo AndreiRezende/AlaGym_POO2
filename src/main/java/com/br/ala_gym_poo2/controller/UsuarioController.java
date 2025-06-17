@@ -36,6 +36,11 @@ public class UsuarioController {
         return this.usuarioRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Usuario getUsuario(@PathVariable Long id){
+        return this.usuarioRepository.findById(id).get();
+    }
+
     //@PreAuthorize("hasRole('FUNCIONARIO')")
     @PostMapping("/registro")
     public Usuario createUsuario(@RequestBody UsuarioDTO dto){
@@ -65,7 +70,7 @@ public class UsuarioController {
         Usuario usuario = this.usuarioRepository.findById(id).get();
         usuario.setNome(dto.nome());
         usuario.setEmail(dto.email());
-        usuario.setSenha(dto.senha());
+        if (dto.senha() != null) usuario.setSenha(securityConfiguration.passwordEncoder().encode(dto.senha()));
         usuario.setEndereco(dto.endereco());
         usuario.setTelefone(dto.telefone());
         usuario.setPermissao(Role.valueOf(dto.permissao().toUpperCase()));
