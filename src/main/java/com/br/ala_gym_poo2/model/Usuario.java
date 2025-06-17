@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 @Table(name="usuario")
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +39,16 @@ public class Usuario {
     private float altura;
     @Column
     private boolean statusPagamento;
+    @Column
+    private List<Long> idsTreino;
+
+    public List<Long> getIdsTreino() {
+        return idsTreino;
+    }
+
+    public void setIdsTreino(List<Long> idsTreino) {
+        this.idsTreino = idsTreino;
+    }
 
     public boolean isStatusPagamento() {
         return statusPagamento;
