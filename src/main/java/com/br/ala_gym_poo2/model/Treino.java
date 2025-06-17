@@ -17,12 +17,11 @@ public class Treino {
         return id;
     }
 
-
-    public String getDescription() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescription(String description) {
-        this.descricao = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
