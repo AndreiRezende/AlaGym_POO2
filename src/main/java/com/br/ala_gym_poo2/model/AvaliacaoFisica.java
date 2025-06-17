@@ -1,5 +1,6 @@
 package com.br.ala_gym_poo2.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -32,6 +33,22 @@ public class AvaliacaoFisica {
     @Column(nullable=false)
     private Long usuarioId;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     public Long getUsuario() {
         return usuarioId;
     }
@@ -40,11 +57,11 @@ public class AvaliacaoFisica {
         this.usuarioId = usuarioId;
     }
 
-    public Date getDataAvaliacao() {
+    public LocalDate getDataAvaliacao() {
         return dataAvaliacao;
     }
 
-    public void setDataAvaliacao(Date dataAvaliacao) {
+    public void setDataAvaliacao(LocalDate dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
 
